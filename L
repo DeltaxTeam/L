@@ -1,0 +1,40 @@
+local gui = Instance.new("ScreenGui")
+gui.Parent = game.CoreGui
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0.2, 0, 0.3, 0) -- Reduced size
+frame.Position = UDim2.new(0.75, 0, 0.1, 0) -- Adjusted position
+frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+frame.Parent = gui
+
+local usernameTextBox = Instance.new("Enter player username")
+usernameTextBox.PlaceholderText = "Username"
+usernameTextBox.Size = UDim2.new(0.8, 0, 0.2, 0) -- Reduced size
+usernameTextBox.Position = UDim2.new(0.1, 0, 0.1, 0)
+usernameTextBox.Parent = frame
+
+local banExplanationTextBox = Instance.new("Enter ban explation")
+banExplanationTextBox.PlaceholderText = "Ban Explanation"
+banExplanationTextBox.Size = UDim2.new(0.8, 0, 0.2, 0) -- Reduced size
+banExplanationTextBox.Position = UDim2.new(0.1, 0, 0.4, 0) -- Adjusted position
+banExplanationTextBox.Parent = frame
+
+local kickButton = Instance.new("TextButton")
+kickButton.Text = "Kick"
+kickButton.Size = UDim2.new(0.4, 0, 0.1, 0)
+kickButton.Position = UDim2.new(0.3, 0, 0.7, 0) -- Adjusted position
+kickButton.Parent = frame
+
+local function kickPlayer()
+    local playerName = usernameTextBox.Text
+    local banExplanation = banExplanationTextBox.Text
+    
+    local player = game.Players:FindFirstChild(playerName)
+    if player then
+        player:Kick("You have been kicked. Reason: " .. banExplanation)
+    else
+        warn("Player not found!") -- Output a warning if player not found
+    end
+end
+
+kickButton.MouseButton1Click:Connect(kickPlayer)
